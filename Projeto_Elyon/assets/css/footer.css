@@ -1,0 +1,53 @@
+/* Rodapé */
+
+#rodape img {
+    width: 100px;
+    height: auto;
+}
+
+.div_info_rod {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.div_info_rod a {
+    color: var(--cor-terciaria);
+    text-decoration: none;
+}
+
+.div_info_rod a:hover {
+    text-decoration: underline;
+}
+
+.div_info_rod hr {
+    border: none;
+    width: 2px;
+    height: 20px;
+    background-color: var(--cor-secundaria);
+}
+
+
+#rodape {
+    border-top: 2px solid var(--cor-secundaria);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to right, #5A2D82, #111);
+    color: #ccc;
+    border-top: 2px solid #D3AF37;
+}
+
+#rodape img {
+    width: 75px;
+    height: auto;
+}
+
+.logorodape {
+    display: flex;
+}
