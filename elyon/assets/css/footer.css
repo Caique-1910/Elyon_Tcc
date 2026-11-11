@@ -1,0 +1,87 @@
+/* =========================
+   RODAPÉ
+========================= */
+
+#rodape {
+    width: 100%;
+
+    margin: 0;
+    padding: 20px;
+
+    border-top: 2px solid #D3AF37;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 15px;
+
+    text-align: center;
+
+    background: linear-gradient(
+        to right,
+        #5A2D82,
+        #111
+    );
+
+    color: #ccc;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+#rodape img {
+    width: 75px;
+    height: auto;
+}
+
+.logorodape {
+    display: flex;
+    align-items: center;
+}
+
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.div_info_rod {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.div_info_rod a {
+    color: var(--cor-terciaria);
+
+    text-decoration: none;
+}
+
+.div_info_rod a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   SEPARADORES
+========================= */
+
+.div_info_rod hr {
+    border: none;
+
+    width: 2px;
+    height: 20px;
+
+    margin: 0;
+
+    background-color: var(--cor-secundaria);
+}

@@ -1,0 +1,189 @@
+/* =========================
+   CONTEÚDO DA PÁGINA SOBRE
+========================= */
+
+.conteudo_principal {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px 80px;
+
+    background: linear-gradient(
+        to right,
+        var(--cor-secundaria),
+        #111111
+    );
+}
+
+
+/* =========================
+   SEÇÃO SOBRE
+========================= */
+
+.texto {
+    width: 100%;
+    max-width: 1400px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 50px;
+}
+
+
+/* =========================
+   TEXTO
+========================= */
+
+.tx {
+    width: 60%;
+
+    padding: 40px;
+
+    border: 1px solid var(--cor-secundaria);
+    border-radius: 15px;
+
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+/* TÍTULO */
+
+.tx h2 {
+    margin-bottom: 25px;
+
+    color: var(--cor-terciaria);
+
+    font-size: 2.5rem;
+    font-weight: 500;
+
+    text-align: center;
+}
+
+
+/* PARÁGRAFO */
+
+.tx p {
+    color: var(--cor-texto-secundario);
+
+    font-size: 1.1rem;
+    line-height: 1.8;
+
+    text-align: justify;
+}
+
+
+/* =========================
+   IMAGEM
+========================= */
+
+.img_perf {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.img_perf img {
+    width: 100%;
+    max-width: 500px;
+    height: 70%;
+
+    border-radius: 15px;
+
+    object-fit: cover;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media screen and (max-width: 1024px) {
+
+    .conteudo_principal {
+        padding: 50px 40px;
+    }
+
+    .texto {
+        gap: 30px;
+    }
+
+    .tx {
+        width: 55%;
+        padding: 30px;
+    }
+
+    .img_perf {
+        width: 45%;
+    }
+
+    .tx h2 {
+        font-size: 2rem;
+    }
+
+    .tx p {
+        font-size: 1rem;
+    }
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media screen and (max-width: 768px) {
+
+    .conteudo_principal {
+        padding: 40px 20px;
+    }
+
+    .texto {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .tx {
+        width: 100%;
+        padding: 25px;
+    }
+
+    .img_perf {
+        width: 100%;
+    }
+
+    .img_perf img {
+        max-width: 400px;
+    }
+}
+
+
+/* =========================
+   CELULAR PEQUENO
+========================= */
+
+@media screen and (max-width: 480px) {
+
+    .conteudo_principal {
+        padding: 30px 15px;
+    }
+
+    .tx {
+        padding: 20px;
+    }
+
+    .tx h2 {
+        font-size: 1.8rem;
+    }
+
+    .tx p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+}

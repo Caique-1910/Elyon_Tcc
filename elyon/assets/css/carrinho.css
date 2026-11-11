@@ -1,0 +1,424 @@
+
+/* ========================================
+   PÁGINA DO CARRINHO - ELYON
+======================================== */
+
+.conteudo_carrinho {
+    width: 100%;
+    min-height: 80vh;
+    padding: 35px 5% 45px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(
+        to right,
+        #5A2D82 0%,
+        #351947 48%,
+        #080808 100%
+    );
+
+    color: #FCF7F4;
+    font-family: inherit;
+}
+
+/* Título */
+
+.conteudo_carrinho > h1 {
+    margin: 0 0 28px;
+    color: #D3AF37;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+/* ========================================
+   TABELA DO CARRINHO
+======================================== */
+
+.tabela-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 10px;
+}
+
+.tabela-carrinho {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+
+.tabela-carrinho thead {
+    background-color: #5A2D82;
+}
+
+.tabela-carrinho th {
+    padding: 13px 12px;
+    color: #D3AF37;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.tabela-carrinho th:first-child {
+    width: 40%;
+    border-radius: 9px 0 0 9px;
+}
+
+.tabela-carrinho th:nth-child(2) {
+    width: 20%;
+}
+
+.tabela-carrinho th:nth-child(3) {
+    width: 18%;
+}
+
+.tabela-carrinho th:last-child {
+    width: 22%;
+    border-radius: 0 9px 9px 0;
+}
+
+.tabela-carrinho td {
+    padding: 16px 12px;
+    color: #D3AF37;
+    font-size: 15px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(211, 175, 55, 0.15);
+}
+
+/* Produto e imagem */
+
+.tabela-carrinho td.produto {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    text-align: left;
+}
+
+.tabela-carrinho .produto img {
+    display: block;
+    flex-shrink: 0;
+
+    width: 75px;
+    height: 75px;
+    padding: 5px;
+    box-sizing: border-box;
+
+    object-fit: contain;
+    background-color: #FFFFFF;
+    border-radius: 9px;
+}
+
+.tabela-carrinho .produto span,
+.tabela-carrinho .produto p {
+    margin: 0;
+    max-width: 220px;
+    color: #D3AF37;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   ÁREA INFERIOR
+======================================== */
+
+.acoes-carrinho {
+    display: grid;
+    grid-template-columns: minmax(220px, 28%) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+    margin-top: 24px;
+}
+
+/* ========================================
+   CUPOM
+======================================== */
+
+.cupom {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+}
+
+.cupom h2 {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 9px;
+    background-color: #5A2D82;
+
+    color: #D3AF37;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.cupom form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cupom input {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+    outline: none;
+
+    background-color: #5A2D82;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.cupom input::placeholder {
+    color: #D3AF37;
+}
+
+.cupom input:focus {
+    border-color: #D3AF37;
+}
+
+.cupom button {
+    min-height: 42px;
+    padding: 10px 12px;
+
+    border: none;
+    border-radius: 9px;
+    background-color: #5A2D82;
+
+    color: #D3AF37;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* ========================================
+   RESUMO DO PEDIDO
+======================================== */
+
+.pedido {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+}
+
+.pagamento {
+    padding: 18px 20px;
+    border-radius: 9px;
+    background-color: #5A2D82;
+
+    color: #D3AF37;
+    text-align: center;
+}
+
+.pagamento p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.pagamento h3 {
+    margin: 12px 0 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.botoes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.botoes a,
+.botoes button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 44px;
+    padding: 10px 14px;
+    box-sizing: border-box;
+
+    border: none;
+    border-radius: 9px;
+    background-color: #5A2D82;
+
+    color: #D3AF37;
+    font-family: inherit;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.botoes a:hover,
+.botoes button:hover,
+.cupom button:hover {
+    background-color: #70409A;
+}
+
+.botoes a:hover,
+.botoes button:hover {
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   CARRINHO VAZIO
+======================================== */
+
+.carrinho-vazio {
+    padding: 45px 20px;
+    border: 1px solid #70409A;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.carrinho-vazio h2 {
+    color: #D3AF37;
+}
+
+.carrinho-vazio p {
+    color: #FCF7F4;
+    line-height: 1.6;
+}
+
+.btn-voltar {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 42px;
+    padding: 10px 18px;
+    box-sizing: border-box;
+
+    border-radius: 9px;
+    background-color: #5A2D82;
+
+    color: #D3AF37;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-voltar:hover {
+    background-color: #70409A;
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media screen and (max-width: 900px) {
+    .conteudo_carrinho {
+        padding: 30px 3% 40px;
+    }
+
+    .acoes-carrinho {
+        grid-template-columns: minmax(160px, 30%) minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .tabela-carrinho th,
+    .tabela-carrinho td {
+        padding: 12px 8px;
+    }
+
+    .tabela-carrinho .produto img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .botoes {
+        gap: 10px;
+    }
+}
+
+/* ========================================
+   CELULAR
+======================================== */
+
+@media screen and (max-width: 600px) {
+    .conteudo_carrinho {
+        padding: 25px 12px 35px;
+    }
+
+    .conteudo_carrinho > h1 {
+        font-size: 27px;
+        margin-bottom: 20px;
+    }
+
+    .tabela-container {
+        overflow-x: auto;
+    }
+
+    .tabela-carrinho {
+        min-width: 520px;
+    }
+
+    .tabela-carrinho th {
+        padding: 10px 7px;
+        font-size: 12px;
+    }
+
+    .tabela-carrinho td {
+        padding: 12px 7px;
+        font-size: 12px;
+    }
+
+    .tabela-carrinho .produto img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .tabela-carrinho .produto span,
+    .tabela-carrinho .produto p {
+        font-size: 11px;
+    }
+
+    .tabela-carrinho td.produto {
+        gap: 9px;
+    }
+
+    .acoes-carrinho {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        margin-top: 24px;
+    }
+
+    .cupom {
+        gap: 10px;
+    }
+
+    .pedido {
+        gap: 14px;
+    }
+
+    .pagamento {
+        padding: 15px 12px;
+    }
+
+    .pagamento p {
+        font-size: 13px;
+    }
+
+    .pagamento h3 {
+        font-size: 18px;
+    }
+
+    .botoes {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+}

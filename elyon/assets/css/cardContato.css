@@ -1,0 +1,173 @@
+
+/* ========================================
+   GRADE DOS CARDS
+======================================== */
+
+.div_dos_cards_contato {
+    width: 100%;
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    align-items: start;
+}
+
+/* ========================================
+   CARD
+======================================== */
+
+.card-contato {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+
+    background-color: #111111;
+    border: 2px solid var(--cor-secundaria);
+    border-radius: 15px;
+
+    box-sizing: border-box;
+    overflow: hidden;
+
+    transition: border-color 0.3s, box-shadow 0.3s,
+                transform 0.3s;
+}
+
+.card-contato:hover,
+.card-contato.aberto {
+    border-color: var(--cor-terciaria);
+    box-shadow: 0 0 15px rgba(90, 45, 130, 0.5);
+    transform: translateY(-3px);
+}
+
+/* ========================================
+   CABEÇALHO CLICÁVEL
+======================================== */
+
+.card-cabecalho {
+    width: 100%;
+    min-height: 100px;
+    padding: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+}
+
+.card-cabecalho h3 {
+    margin: 0;
+    color: var(--cor-terciaria);
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.seta-contato {
+    flex-shrink: 0;
+    color: var(--cor-terciaria);
+    font-size: 25px;
+    transition: transform 0.3s ease;
+}
+
+.card-contato.aberto .seta-contato {
+    transform: rotate(180deg);
+}
+
+/* ========================================
+   DESCRIÇÃO EXPANSÍVEL
+======================================== */
+
+.card-info {
+    padding: 0 25px 25px;
+    color: #cccccc;
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.card-info p {
+    margin: 0;
+}
+
+.card-info[hidden] {
+    display: none;
+}
+
+.card-info.animando {
+    animation: abrirInfo 0.3s ease;
+}
+
+@keyframes abrirInfo {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media screen and (max-width: 1024px) {
+    .div_dos_cards_contato {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+}
+
+/* ========================================
+   CELULAR
+======================================== */
+
+@media screen and (max-width: 768px) {
+    .div_dos_cards_contato {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+    }
+
+    .card-cabecalho {
+        min-height: 85px;
+        padding: 20px;
+    }
+
+    .card-cabecalho h3 {
+        font-size: 20px;
+    }
+
+    .card-info {
+        padding: 0 20px 20px;
+    }
+}
+
+/* ========================================
+   CELULAR PEQUENO
+======================================== */
+
+@media screen and (max-width: 480px) {
+    .div_dos_cards_contato {
+        gap: 15px;
+        padding: 0 10px;
+    }
+
+    .card-cabecalho h3 {
+        font-size: 18px;
+    }
+
+    .card-info {
+        font-size: 14px;
+    }
+}

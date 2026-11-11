@@ -1,0 +1,29 @@
+/* =========================
+   VARIÁVEIS GLOBAIS
+========================= */
+
+:root {
+    --cor-principal: #000000;
+    --cor-secundaria: #5A2D82;
+    --cor-terciaria: #D3AF37;
+
+    --cor-fundo: #111111;
+    --cor-texto: #ffffff;
+    --cor-texto-secundario: #cccccc;
+
+    --fonte-principal: Arial, sans-serif;
+
+    --espacamento-padrao: 20px;
+    --raio-padrao: 10px;
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

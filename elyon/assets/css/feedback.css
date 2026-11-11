@@ -1,0 +1,393 @@
+/* ========================================
+   FEEDBACK
+======================================== */
+
+/* Container principal */
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 80px;
+
+    background: linear-gradient(to right,
+            var(--cor-secundaria),
+            #111111);
+}
+
+
+/* ========================================
+   CARD DE FEEDBACK
+======================================== */
+
+.feedback-card {
+    width: 100%;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background: linear-gradient(to right, #5A2D82, #111);
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+    animation: fadeUp 0.8s ease;
+}
+
+
+/* Animação */
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ========================================
+   TÍTULO
+======================================== */
+
+.feedback-card h1 {
+    text-align: center;
+
+    color: var(--cor-terciaria);
+
+    margin-bottom: 10px;
+}
+
+
+/* ========================================
+   SUBTÍTULO
+======================================== */
+
+.subtitle {
+    text-align: center;
+
+    color: #a89999;
+
+    margin-bottom: 30px;
+}
+
+
+/* ========================================
+   FORMULÁRIO
+======================================== */
+
+.feedback-card form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* ========================================
+   LABELS
+======================================== */
+
+.feedback-card label {
+    font-weight: 500;
+
+    color: var(--cor-terciaria);
+}
+
+
+/* ========================================
+   INPUTS, SELECT E TEXTAREA
+======================================== */
+
+.feedback-card input,
+.feedback-card select,
+.feedback-card textarea {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #928585;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    background: #2a1f3c;
+
+    color: #f4f1ee;
+
+    transition: 0.3s;
+
+}
+
+
+/* Placeholder */
+
+.feedback-card input::placeholder,
+.feedback-card textarea::placeholder {
+
+    color: #c9b58b;
+
+    opacity: 1;
+
+}
+
+
+/* ========================================
+   FOCO NOS CAMPOS
+======================================== */
+
+.feedback-card input:focus,
+.feedback-card select:focus,
+.feedback-card textarea:focus {
+
+    outline: none;
+
+    border-color: var(--cor-terciaria);
+
+    box-shadow:
+        0 0 8px rgba(184, 134, 11, 0.2);
+
+}
+
+
+/* ========================================
+   ESTRELAS
+======================================== */
+
+.rating {
+
+    display: flex;
+
+    flex-direction: row-reverse;
+
+    justify-content: flex-end;
+
+    gap: 5px;
+}
+
+
+/* Esconde os radio buttons */
+
+.rating input {
+
+    display: none;
+
+}
+
+
+/* Estrelas */
+
+.rating label {
+
+    font-size: 35px;
+
+    color: #ddd;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+/* Hover */
+
+.rating label:hover,
+.rating label:hover~label {
+
+    color: #FFD700;
+
+}
+
+
+/* Estrela selecionada */
+
+.rating input:checked~label {
+
+    color: #FFD700;
+
+}
+
+
+/* ========================================
+   EMOJIS
+======================================== */
+
+.emoji-group {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+}
+
+
+/* Botões */
+
+.emoji-group button {
+
+    width: 60px;
+
+    height: 60px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f5f5f5;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+}
+
+
+/* Hover */
+
+.emoji-group button:hover {
+
+    transform: scale(1.1);
+
+    background: #fff5d6;
+
+}
+
+
+/* ========================================
+   BOTÃO ENVIAR
+======================================== */
+
+.submit-btn {
+
+    margin-top: 10px;
+
+    background: var(--cor-terciaria);
+
+    color: white;
+
+    border: none;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+/* Hover */
+
+.submit-btn:hover {
+
+    background: #9c7209;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* ========================================
+   TABLET / CELULAR
+======================================== */
+
+@media screen and (max-width: 768px) {
+
+    .container {
+
+        width: 95%;
+
+        margin: 120px auto 40px auto;
+
+    }
+
+    .feedback-card {
+
+        padding: 25px;
+
+    }
+
+    .feedback-card h1 {
+
+        font-size: 28px;
+
+    }
+
+}
+
+
+/* ========================================
+   CELULAR PEQUENO
+======================================== */
+
+@media screen and (max-width: 480px) {
+
+    .container {
+
+        width: 92%;
+
+        margin-top: 180px;
+
+    }
+
+    .feedback-card {
+
+        padding: 20px;
+
+    }
+
+    .feedback-card h1 {
+
+        font-size: 24px;
+
+    }
+
+    .subtitle {
+
+        font-size: 14px;
+
+    }
+
+    .rating label {
+
+        font-size: 30px;
+
+    }
+
+    .emoji-group {
+
+        gap: 10px;
+
+    }
+
+    .emoji-group button {
+
+        width: 50px;
+
+        height: 50px;
+
+        font-size: 24px;
+
+    }
+
+}

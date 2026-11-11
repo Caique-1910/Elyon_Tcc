@@ -1,0 +1,76 @@
+.div_dos_cards {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 40px;
+
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+}
+
+.card {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    width: 280px;
+    min-height: 350px;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    border: 2px solid var(--cor-secundaria);
+
+    border-radius: 15px;
+
+    background-color: #111;
+
+    text-decoration: none;
+
+    color: white;
+
+    transition: 0.3s;
+}
+
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+
+.img_card {
+    width: 220px;
+    height: 220px;
+
+    object-fit: contain;
+
+    margin-bottom: 15px;
+}
+
+
+.card h2 {
+    margin: 10px 0;
+
+    color: var(--cor-terciaria);
+
+    font-size: 22px;
+
+    text-align: center;
+}
+
+
+.card .preco {
+    margin: 5px 0;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}

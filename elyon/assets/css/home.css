@@ -1,0 +1,208 @@
+/* =========================
+   CONTEÚDO PRINCIPAL
+========================= */
+
+.conteudo_principal {
+    width: 100%;
+    min-height: calc(100vh - 100px);
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #5A2D82, #111111);
+}
+
+/* CORREÇÃO FORÇADA DO CARROSSEL */
+main.conteudo_principal > #banner.carrossel {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: 480px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+#banner.carrossel .carrossel-slides {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#banner.carrossel .slide {
+    display: none !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#banner.carrossel .slide.ativo {
+    display: block !important;
+}
+
+#banner.carrossel .slide img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+#banner.carrossel .banner-texto {
+    position: absolute !important;
+    z-index: 2 !important;
+    top: 50% !important;
+    left: 9% !important;
+    right: 10% !important;
+    transform: translateY(-50%) !important;
+    max-width: 580px !important;
+    color: white !important;
+}
+
+#banner.carrossel .banner-texto h1,
+#banner.carrossel .banner-texto p {
+    color: white !important;
+}
+
+#banner.carrossel .banner-botao {
+    display: inline-block !important;
+    padding: 13px 24px !important;
+    background: #5A2D82 !important;
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 6px !important;
+}
+
+#banner.carrossel .seta,
+#banner.carrossel .indicadores {
+    z-index: 5 !important;
+}
+
+@media (max-width: 768px) {
+    main.conteudo_principal > #banner.carrossel {
+        height: 350px !important;
+    }
+}
+
+/* =========================
+   ÁREA DOS CARDS
+========================= */
+
+.cards {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 45px 0 100px;
+    background: linear-gradient(to right, #5A2D82, #111111);
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 768px) {
+    #banner.carrossel {
+        height: 380px;
+    }
+
+    #banner .banner-texto {
+        left: 12%;
+        right: 12%;
+    }
+
+    #banner .banner-texto h1 {
+        font-size: 30px;
+    }
+
+    #banner .banner-texto p {
+        font-size: 16px;
+    }
+
+    #banner .seta {
+        width: 35px;
+        height: 35px;
+        font-size: 17px;
+    }
+
+    #banner .seta-anterior {
+        left: 8px;
+    }
+
+    #banner .seta-proxima {
+        right: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    #banner.carrossel {
+        height: 330px;
+    }
+
+    #banner .banner-texto h1 {
+        font-size: 26px;
+    }
+
+    #banner .banner-texto p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    #banner .banner-botao {
+        padding: 11px 16px;
+        font-size: 14px;
+    }
+}
+
+
+/* =========================
+   TRANSIÇÃO DO CARROSSEL
+========================= */
+
+#banner.carrossel .carrossel-slides > .slide {
+    display: block !important;
+    position: absolute !important;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 0;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#banner.carrossel .carrossel-slides > .slide.ativo {
+    display: block !important;
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
+
+/* Texto dourado */
+#banner .banner-texto h1 {
+    color: #D3AF37 !important;
+    font-size: 44px;
+    line-height: 1.2;
+    margin: 0 0 18px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+#banner .banner-texto p {
+    color: #D3AF37 !important;
+    font-size: 19px;
+    line-height: 1.6;
+    margin: 0 0 25px;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+/* Botão em harmonia com a identidade da Elyon */
+#banner .banner-botao {
+    background: #5A2D82;
+    color: #D3AF37;
+    border: 1px solid #D3AF37;
+    transition: background 0.3s ease, color 0.3s ease,
+                transform 0.3s ease;
+}
+
+#banner .banner-botao:hover {
+    background: #D3AF37;
+    color: #111111;
+    transform: translateY(-2px);
+}
