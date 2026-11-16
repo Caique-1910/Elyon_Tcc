@@ -68,7 +68,7 @@ C:/xampp/htdocs/elyon/
 
 1. Inicie o Apache e o MySQL pelo XAMPP.
 2. Acesse o phpMyAdmin.
-3. Crie o banco de dados `PERFUMARIA3k`.
+3. Crie o banco de dados `elyon`.
 4. Importe o arquivo SQL do projeto, caso disponível.
 5. Verifique as configurações de conexão com o banco de dados.
 
