@@ -17,16 +17,27 @@ O projeto busca aplicar conhecimentos de desenvolvimento web, organização de c
 
 ## 📂 Estrutura do projeto
 
+## 📂 Estrutura do projeto
+
 ```text
 elyon/
 │
-├── css/              # Arquivos de estilização
-├── js/               # Scripts JavaScript
-├── img/              # Imagens do projeto
-├── includes/         # Arquivos reutilizáveis
-├── conexao.php       # Conexão com o banco de dados
-├── index.php         # Página inicial
-└── ...
+├── assets/
+│   ├── css/              # Arquivos de estilização
+│   ├── js/               # Scripts JavaScript
+│   └── imgs/             # Imagens do projeto
+│
+├── includes/             # Arquivos reutilizáveis
+│
+├── php/
+│   ├── config/           # Configurações e conexão com o banco
+│   ├── controllers/      # Controle das funcionalidades
+│   ├── models/           # Modelos e regras de negócio
+│   ├── routes/           # Rotas da aplicação
+│   ├── views/            # Interfaces e páginas do sistema
+│   └── index.php         # Ponto de entrada da aplicação
+│
+└── ...                   # Demais arquivos do projeto
 ```
 
 *Observação: a estrutura acima é ilustrativa e pode ser ajustada conforme a organização real do projeto.*
