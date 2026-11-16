@@ -78,7 +78,7 @@ http://localhost/elyon/
 - Simular o desenvolvimento de uma solução para um estabelecimento comercial.
 
 ## 🎓 Desenvolvimento acadêmico
-Projeto desenvolvido pelos alunos Caique Lima Alves, Heitor Riony Perez e Leonardo Marcondes Castagna  da turma **3K**, como parte das atividades práticas de desenvolvimento de sistemas.
+Projeto desenvolvido pelos alunos Caique Lima Alves, Heitor Riony Perez e Leonardo Marcondes Castagna  da turma **3K** do Alcina Dantas Feijão, como parte das atividades práticas de desenvolvimento de web.
 
 ---
 
