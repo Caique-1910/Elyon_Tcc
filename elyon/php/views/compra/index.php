@@ -4,22 +4,31 @@
 $produto = $produto ?? [];
 $feedbacks = $feedbacks ?? [];
 
+// INFORMAÇÕES DO PRODUTO
 $nomeProduto = (string) ($produto['Nome'] ?? 'Produto');
-$imagemProduto = trim((string) ($produto['Imagem'] ?? ''));
-
-// Tratamento do caminho da imagem
-if ($imagemProduto === '') {
-    $imagemProduto = '/elyon/assets/imgs/logoElyon1.png';
-} elseif (!preg_match('/^(https?:\/\/|\/)/i', $imagemProduto)) {
-    $imagemProduto = '/elyon/' . ltrim($imagemProduto, '/');
-} elseif (strpos($imagemProduto, '/elyon/') === 0) {
-    // Mantém o caminho já configurado
-}
-
 $precoProduto = (float) ($produto['Preco'] ?? 0);
 $tipoProduto = (string) ($produto['Tipo'] ?? '');
 $descricaoProduto = (string) ($produto['Descricao'] ?? '');
 $idProduto = (int) ($produto['Idproduto'] ?? 0);
+
+// TOKEN CSRF
+$tokenCsrf = $_SESSION['csrf_token'] ?? '';
+
+// IMAGEM DO PRODUTO
+$imagem = trim((string) ($produto['Imagem'] ?? ''));
+
+if ($imagem === '') {
+
+    $imagem = BASE_URL . '/assets/imgs/logoElyon1.png';
+
+} elseif (!preg_match('/^https?:\/\//i', $imagem)) {
+
+    // Remove caminhos relativos e barras iniciais
+    $imagem = preg_replace('/^(\.\.\/)+/', '', $imagem);
+    $imagem = ltrim($imagem, '/');
+
+    $imagem = BASE_URL . '/' . $imagem;
+}
 
 ?>
 
@@ -30,12 +39,15 @@ $idProduto = (int) ($produto['Idproduto'] ?? 0);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?= htmlspecialchars($nomeProduto, ENT_QUOTES, 'UTF-8') ?> - Elyon Perfumaria</title>
+    <title>
+        <?= htmlspecialchars($nomeProduto, ENT_QUOTES, 'UTF-8') ?>
+        - Elyon Perfumaria
+    </title>
 
-    <link rel="stylesheet" href="../../../assets/css/global.css">
-    <link rel="stylesheet" href="../../../assets/css/header.css">
-    <link rel="stylesheet" href="../../../assets/css/footer.css">
-    <link rel="stylesheet" href="../../../assets/css/compra.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/global.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/header.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/footer.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/compra.css">
 </head>
 
 <body>
@@ -53,17 +65,17 @@ $idProduto = (int) ($produto['Idproduto'] ?? 0);
                 <div class="miniaturas">
 
                     <img
-                        src="<?= htmlspecialchars($imagemProduto, ENT_QUOTES, 'UTF-8') ?>"
+                        src="<?= htmlspecialchars($imagem, ENT_QUOTES, 'UTF-8') ?>"
                         alt="<?= htmlspecialchars($nomeProduto, ENT_QUOTES, 'UTF-8') ?>"
                     >
 
                     <img
-                        src="<?= htmlspecialchars($imagemProduto, ENT_QUOTES, 'UTF-8') ?>"
+                        src="<?= htmlspecialchars($imagem, ENT_QUOTES, 'UTF-8') ?>"
                         alt="<?= htmlspecialchars($nomeProduto, ENT_QUOTES, 'UTF-8') ?>"
                     >
 
                     <img
-                        src="<?= htmlspecialchars($imagemProduto, ENT_QUOTES, 'UTF-8') ?>"
+                        src="<?= htmlspecialchars($imagem, ENT_QUOTES, 'UTF-8') ?>"
                         alt="<?= htmlspecialchars($nomeProduto, ENT_QUOTES, 'UTF-8') ?>"
                     >
 
@@ -72,7 +84,7 @@ $idProduto = (int) ($produto['Idproduto'] ?? 0);
                 <div class="img_principal">
 
                     <img
-                        src="<?= htmlspecialchars($imagemProduto, ENT_QUOTES, 'UTF-8') ?>"
+                        src="<?= htmlspecialchars($imagem, ENT_QUOTES, 'UTF-8') ?>"
                         alt="<?= htmlspecialchars($nomeProduto, ENT_QUOTES, 'UTF-8') ?>"
                     >
 
@@ -100,7 +112,13 @@ $idProduto = (int) ($produto['Idproduto'] ?? 0);
                 </p>
 
                 <!-- FORMULÁRIO DE COMPRA -->
-                <form action="/elyon/compra/adicionar" method="POST">
+                <form action="<?= BASE_URL ?>/compra/adicionar" method="POST">
+
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="<?= htmlspecialchars($tokenCsrf, ENT_QUOTES, 'UTF-8') ?>"
+                    >
 
                     <input
                         type="hidden"

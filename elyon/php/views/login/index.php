@@ -1,3 +1,46 @@
+
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// MENSAGEM DE REDIRECIONAMENTO
+if (!empty($_SESSION['mensagem_login'])):
+    $mensagem = $_SESSION['mensagem_login'];
+    unset($_SESSION['mensagem_login']);
+?>
+
+    <script>
+        alert(<?= json_encode(
+            $mensagem,
+            JSON_HEX_TAG |
+            JSON_HEX_APOS |
+            JSON_HEX_AMP |
+            JSON_HEX_QUOT
+        ) ?>);
+    </script>
+
+<?php endif; ?>
+
+<?php
+// MENSAGEM DE ERRO NO LOGIN
+if (!empty($_SESSION['mensagem_erro_login'])):
+    $mensagem = $_SESSION['mensagem_erro_login'];
+    unset($_SESSION['mensagem_erro_login']);
+?>
+
+    <script>
+        alert(<?= json_encode(
+            $mensagem,
+            JSON_HEX_TAG |
+            JSON_HEX_APOS |
+            JSON_HEX_AMP |
+            JSON_HEX_QUOT
+        ) ?>);
+    </script>
+
+<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -5,7 +48,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../../../assets/css/login.css">
+    <link
+        rel="stylesheet"
+        href="<?= BASE_URL ?>/assets/css/login.css"
+    >
 
     <title>Login - Elyon</title>
 </head>
@@ -26,11 +72,22 @@
 
     <?php if (isset($erro)): ?>
         <p class="erro">
-            <?= htmlspecialchars($erro) ?>
+            <?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?>
         </p>
     <?php endif; ?>
 
-    <form action="/elyon/index.php?url=login/salvar" method="POST">
+    <form action="<?= BASE_URL ?>/login/salvar" method="POST">
+
+        <!-- TOKEN CSRF -->
+        <input
+            type="hidden"
+            name="csrf_token"
+            value="<?= htmlspecialchars(
+                $_SESSION['csrf_token'] ?? '',
+                ENT_QUOTES,
+                'UTF-8'
+            ) ?>"
+        >
 
         <div class="form-group">
 
@@ -70,7 +127,7 @@
 
         Não possui conta?
 
-        <a href="/elyon/index.php?url=cadastro">
+        <a href="<?= BASE_URL ?>/cadastro">
             Cadastre-se
         </a>
 

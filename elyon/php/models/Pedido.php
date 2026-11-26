@@ -1,3 +1,4 @@
+
 <?php
 
 require_once __DIR__ . '/../config/database.php';
@@ -13,18 +14,15 @@ class Pedido
         $this->conn = $database->conectar();
     }
 
-    // Listar pedidos
     public function listar()
     {
         $sql = "SELECT * FROM {$this->table}";
-
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll();
     }
 
-    // Buscar pedido por ID
     public function buscarPorId($idpedido)
     {
         $sql = "SELECT * FROM {$this->table}
@@ -32,13 +30,11 @@ class Pedido
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':idpedido', $idpedido, PDO::PARAM_INT);
-
         $stmt->execute();
 
         return $stmt->fetch();
     }
 
-    // Cadastrar pedido
     public function cadastrar(
         $idusuario,
         $idproduto,
@@ -52,7 +48,6 @@ class Pedido
                 (:idusuario, :idproduto, :quantidade, :dataentrega, :valor)";
 
         $stmt = $this->conn->prepare($sql);
-
         $stmt->bindParam(':idusuario', $idusuario, PDO::PARAM_INT);
         $stmt->bindParam(':idproduto', $idproduto, PDO::PARAM_INT);
         $stmt->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
@@ -62,7 +57,6 @@ class Pedido
         return $stmt->execute();
     }
 
-    // Atualizar pedido
     public function atualizar(
         $idpedido,
         $quantidade,
@@ -77,7 +71,6 @@ class Pedido
                 WHERE Idpedido = :idpedido";
 
         $stmt = $this->conn->prepare($sql);
-
         $stmt->bindParam(':idpedido', $idpedido, PDO::PARAM_INT);
         $stmt->bindParam(':quantidade', $quantidade, PDO::PARAM_INT);
         $stmt->bindParam(':dataentrega', $dataentrega);
@@ -86,7 +79,6 @@ class Pedido
         return $stmt->execute();
     }
 
-    // Excluir pedido
     public function excluir($idpedido)
     {
         $sql = "DELETE FROM {$this->table}

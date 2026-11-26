@@ -1,57 +1,46 @@
-<?php
 
+<?php
 
 class Database
 {
-    private $host = "localhost";
-    private $database = "u413309708_elyon";
-    private $usuario = "u413309708_elyon";
-    private $senha = "Elyon2026";
+    private string $host = 'localhost';
+    private string $database = 'u413309708_elyon';
+    private string $usuario = 'u413309708_elyon';
+    private string $senha = 'Elyon2026';
 
+    private ?PDO $conexao = null;
 
-    private $conexao;
-
-
-    public function conectar()
+    public function conectar(): PDO
     {
         if ($this->conexao === null) {
 
-
             try {
-
 
                 $this->conexao = new PDO(
                     "mysql:host={$this->host};dbname={$this->database};charset=utf8mb4",
                     $this->usuario,
-                    $this->senha
+                    $this->senha,
+                    [
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                        PDO::ATTR_EMULATE_PREPARES => false
+                    ]
                 );
-
-
-                $this->conexao->setAttribute(
-                    PDO::ATTR_ERRMODE,
-                    PDO::ERRMODE_EXCEPTION
-                );
-
-
-                $this->conexao->setAttribute(
-                    PDO::ATTR_DEFAULT_FETCH_MODE,
-                    PDO::FETCH_ASSOC
-                );
-
 
             } catch (PDOException $e) {
 
+                error_log(
+                    'Erro de conexão com o banco: ' . $e->getMessage()
+                );
 
-                die("Erro ao conectar com o banco: " . $e->getMessage());
-
-
+                throw new RuntimeException(
+                    'Não foi possível conectar ao banco de dados.',
+                    0,
+                    $e
+                );
             }
         }
-
 
         return $this->conexao;
     }
 }
-
-
-

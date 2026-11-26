@@ -1,8 +1,14 @@
+
 RewriteEngine On
 
-RewriteBase /elyon/
+RewriteBase /Trabalhos/3K/elyon/
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+# Encaminha a página inicial para o front controller
+RewriteRule ^$ php/index.php [QSA,L]
 
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+# Não reescreve arquivos existentes
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Encaminha as demais URLs para o front controller
+RewriteRule ^(.*)/?$ php/index.php?url=$1 [QSA,L]

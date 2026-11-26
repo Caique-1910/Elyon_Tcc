@@ -1,29 +1,28 @@
+
 <?php
 
 /**
  * ======================================================
- *  CONSTANTES DO PROJETO ELYON
+ * CONSTANTES DO PROJETO ELYON
  * ======================================================
  */
 
 // Diretório raiz do projeto
 define('ROOT_PATH', dirname(__DIR__, 2));
 
-// Pasta de assets
+// Caminhos físicos
 define('ASSETS_PATH', ROOT_PATH . '/assets');
-
-// Pasta de uploads
 define('UPLOADS_PATH', ROOT_PATH . '/php/uploads');
 
-// URL base
-define('BASE_URL', 'http://localhost/elyon');
+// URL base da aplicação
+define(
+    'BASE_URL',
+    'https://www.exposoftalcina.com/Trabalhos/3K/elyon'
+);
 
-// Nome da aplicação
-define('APP_NAME', 'elyon');
-
-// Versão da aplicação
+// Informações da aplicação
+define('APP_NAME', 'Elyon');
 define('APP_VERSION', '1.0.0');
 
 // E-mail de contato
 define('EMAIL_SUPORTE', 'elyon@gmail.com');
-

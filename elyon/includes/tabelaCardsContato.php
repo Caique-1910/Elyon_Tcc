@@ -1,7 +1,6 @@
 
 <?php
 
-
 $cardsContato = [
     [
         'titulo' => 'Pedidos',
@@ -40,7 +39,6 @@ $cardsContato = [
         'descricao' => 'Fique por dentro das oportunidades para encontrar seus produtos favoritos. Nesta seção, você pode esclarecer dúvidas sobre descontos, campanhas promocionais, cupons e condições especiais de compra. Nossa equipe poderá orientar você sobre a validade das ofertas, os produtos participantes e as regras necessárias para aproveitar cada promoção, conforme os termos divulgados.'
     ]
 ];
-
 
 ?>
 

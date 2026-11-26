@@ -17,8 +17,10 @@ $sucesso = $sucesso ?? '';
 
     <title>Feedback - Elyon Perfumaria</title>
 
-    <link rel="stylesheet" href="/elyon/assets/css/global.css">
-    <link rel="stylesheet" href="/elyon/assets/css/feedback.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/global.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/feedback.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/header.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/footer.css">
 
 </head>
 
@@ -29,7 +31,6 @@ $sucesso = $sucesso ?? '';
     <?php
     require_once __DIR__ . '/../../../includes/header.php';
     ?>
-
 
     <!-- CONTEÚDO -->
 
@@ -43,7 +44,6 @@ $sucesso = $sucesso ?? '';
                 Seu feedback nos ajuda a oferecer fragrâncias ainda mais especiais.
             </p>
 
-
             <?php if ($erro !== ''): ?>
 
                 <p class="erro">
@@ -51,7 +51,6 @@ $sucesso = $sucesso ?? '';
                 </p>
 
             <?php endif; ?>
-
 
             <?php if ($sucesso !== ''): ?>
 
@@ -61,10 +60,9 @@ $sucesso = $sucesso ?? '';
 
             <?php endif; ?>
 
-
             <form
                 method="POST"
-                action="/elyon/feedback/salvar"
+                action="<?= BASE_URL ?>/feedback/salvar"
             >
 
                 <!-- PRODUTO -->
@@ -103,14 +101,17 @@ $sucesso = $sucesso ?? '';
 
                 </select>
 
-
                 <!-- ESTRELAS -->
 
                 <label id="label-avaliacao">
                     Como você avalia o produto?
                 </label>
 
-                <div class="rating" role="radiogroup" aria-labelledby="label-avaliacao">
+                <div
+                    class="rating"
+                    role="radiogroup"
+                    aria-labelledby="label-avaliacao"
+                >
 
                     <input
                         type="radio"
@@ -122,7 +123,6 @@ $sucesso = $sucesso ?? '';
 
                     <label for="star5" aria-label="5 estrelas">★</label>
 
-
                     <input
                         type="radio"
                         name="estrela"
@@ -131,7 +131,6 @@ $sucesso = $sucesso ?? '';
                     >
 
                     <label for="star4" aria-label="4 estrelas">★</label>
-
 
                     <input
                         type="radio"
@@ -142,7 +141,6 @@ $sucesso = $sucesso ?? '';
 
                     <label for="star3" aria-label="3 estrelas">★</label>
 
-
                     <input
                         type="radio"
                         name="estrela"
@@ -151,7 +149,6 @@ $sucesso = $sucesso ?? '';
                     >
 
                     <label for="star2" aria-label="2 estrelas">★</label>
-
 
                     <input
                         type="radio"
@@ -163,7 +160,6 @@ $sucesso = $sucesso ?? '';
                     <label for="star1" aria-label="1 estrela">★</label>
 
                 </div>
-
 
                 <!-- COMENTÁRIO -->
 
@@ -181,7 +177,6 @@ $sucesso = $sucesso ?? '';
                     required
                 ></textarea>
 
-
                 <!-- ENVIO -->
 
                 <button
@@ -196,7 +191,6 @@ $sucesso = $sucesso ?? '';
         </div>
 
     </main>
-
 
     <!-- FOOTER -->
 

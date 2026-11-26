@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Elyon Perfumaria</title>
-
-    <link rel="stylesheet" href="../assets/css/footer.css">
-    <link rel="stylesheet" href="../assets/css/global.css">
-</head>
 
 <footer id="rodape">
 
     <div class="logorodape">
 
         <img
-            src="../assets/imgs/logoAlcina.png"
+            src="<?= BASE_URL ?>/assets/imgs/logoAlcina.png"
             alt="Logo Elyon"
         >
 
     </div>
-
 
     <div class="info_rodape">
 
@@ -37,27 +24,24 @@
 
     </div>
 
-
     <div class="div_info_rod">
 
-        <a href="/elyon/privacidade">
+        <a href="<?= BASE_URL ?>/privacidade">
             Política de Privacidade
         </a>
 
         <hr>
 
-        <a href="/elyon/contato">
+        <a href="<?= BASE_URL ?>/contato">
             Contato
         </a>
 
         <hr>
 
-        <a href="/elyon/termos">
+        <a href="<?= BASE_URL ?>/termos">
             Termos de Uso
         </a>
 
     </div>
 
 </footer>
-
-</html>

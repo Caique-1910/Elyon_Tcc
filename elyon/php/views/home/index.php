@@ -8,11 +8,12 @@
 
     <title>Elyon Perfumaria</title>
 
-    <link rel="stylesheet" href="../../../assets/css/global.css">
-    <link rel="stylesheet" href="../../../assets/css/home.css">
-    <link rel="stylesheet" href="../../../assets/css/tabelaCards.css">
-
-    <script src="/elyon/assets/js/home.js" defer></script>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/global.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/home.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/tabelaCards.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/header.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/footer.css">
+    <script src="<?= BASE_URL ?>/assets/js/home.js" defer></script>
 </head>
 
 <body>
@@ -33,7 +34,7 @@
                 <!-- SLIDE 1 -->
                 <div class="slide ativo">
                     <img
-                        src="/elyon/assets/imgs/banner1.jpg"
+                        src="<?= BASE_URL ?>/assets/imgs/banner1.jpg"
                         alt="Coleção de perfumes Elyon"
                     >
 
@@ -41,7 +42,7 @@
                         <h1>Sinta a sua essência</h1>
                         <p>Descubra fragrâncias que combinam com você.</p>
 
-                        <a href="/elyon/masculino" class="banner-botao">
+                        <a href="<?= BASE_URL ?>/masculino" class="banner-botao">
                             Descobrir fragrâncias
                         </a>
                     </div>
@@ -50,7 +51,7 @@
                 <!-- SLIDE 2 -->
                 <div class="slide">
                     <img
-                        src="/elyon/assets/imgs/banner2.jpg"
+                        src="<?= BASE_URL ?>/assets/imgs/banner2.jpg"
                         alt="Perfumes sofisticados"
                     >
 
@@ -58,7 +59,7 @@
                         <h1>Elegância em cada detalhe</h1>
                         <p>Encontre o perfume ideal para momentos especiais.</p>
 
-                        <a href="/elyon/feminino" class="banner-botao">
+                        <a href="<?= BASE_URL ?>/feminino" class="banner-botao">
                             Explorar coleção
                         </a>
                     </div>
@@ -67,7 +68,7 @@
                 <!-- SLIDE 3 -->
                 <div class="slide">
                     <img
-                        src="/elyon/assets/imgs/banner3.jpg"
+                        src="<?= BASE_URL ?>/assets/imgs/banner3.jpg"
                         alt="Produtos de beleza e cuidados pessoais"
                     >
 
@@ -75,7 +76,7 @@
                         <h1>Seu momento de cuidado</h1>
                         <p>Conheça nossos produtos de beleza e skincare.</p>
 
-                        <a href="/elyon/skincare" class="banner-botao">
+                        <a href="<?= BASE_URL ?>/skincare" class="banner-botao">
                             Conhecer produtos
                         </a>
                     </div>

@@ -1,3 +1,4 @@
+
 /* =========================
    VARIÁVEIS GLOBAIS
 ========================= */
@@ -8,15 +9,14 @@
     --cor-terciaria: #D3AF37;
 
     --cor-fundo: #111111;
-    --cor-texto: #ffffff;
-    --cor-texto-secundario: #cccccc;
+    --cor-texto: #FFFFFF;
+    --cor-texto-secundario: #CCCCCC;
 
     --fonte-principal: Arial, sans-serif;
 
     --espacamento-padrao: 20px;
     --raio-padrao: 10px;
 }
-
 
 /* =========================
    RESET
@@ -26,4 +26,26 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
 }

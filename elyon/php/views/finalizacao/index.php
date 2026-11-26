@@ -2,6 +2,15 @@
 <?php
 
 $carrinho = $carrinho ?? ($_SESSION['carrinho'] ?? []);
+$compraConcluida = $compraConcluida ?? false;
+
+$cupomAplicado = $cupomAplicado ?? ($_SESSION['cupom'] ?? null);
+
+// Prioriza a mensagem enviada pelo controller.
+$mensagemFinalizacao = $mensagemFinalizacao ?? ($_SESSION['mensagem_finalizacao'] ?? '');
+
+unset($_SESSION['mensagem_finalizacao']);
+
 $totalGeral = 0;
 
 foreach ($carrinho as $item) {
@@ -11,20 +20,43 @@ foreach ($carrinho as $item) {
     $totalGeral += $preco * $quantidade;
 }
 
+$percentualDesconto = max(
+    0,
+    min(100, (float) ($cupomAplicado['Valordesconto'] ?? 0))
+);
+
+$valorDesconto = round(
+    $totalGeral * $percentualDesconto / 100,
+    2
+);
+
+$totalFinal = max(0, $totalGeral - $valorDesconto);
+
+$valorFrete = 0;
+
+if ($compraConcluida) {
+    $totalGeral = (float) ($_SESSION['pedido_subtotal'] ?? 0);
+    $valorDesconto = (float) ($_SESSION['pedido_desconto'] ?? 0);
+    $totalFinal = (float) ($_SESSION['pedido_total'] ?? 0);
+    $valorFrete = (float) ($_SESSION['pedido_frete'] ?? 0);
+}
+
 if (!function_exists('imagemFinalizacao')) {
     function imagemFinalizacao($imagem)
     {
         $imagem = trim((string) $imagem);
 
         if ($imagem === '') {
-            return '/Projeto_Elyon/assets/imgs/logoElyon1.png';
+            return BASE_URL . '/assets/imgs/logoElyon1.png';
         }
 
-        if (preg_match('/^(https?:\/\/|\/)/i', $imagem)) {
+        if (preg_match('/^https?:\/\//i', $imagem)) {
             return $imagem;
         }
 
-        return '/Projeto_Elyon/' . ltrim($imagem, '/');
+        $imagem = preg_replace('/^(\.\.\/)+/', '', $imagem);
+
+        return BASE_URL . '/' . ltrim($imagem, '/');
     }
 }
 
@@ -39,8 +71,12 @@ if (!function_exists('imagemFinalizacao')) {
 
     <title>Finalização - Elyon Perfumaria</title>
 
-    <link rel="stylesheet" href="../../../assets/css/global.css">
-    <link rel="stylesheet" href="../../../assets/css/finalizacao.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/global.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/finalizacao.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/header.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/footer.css">
+
+    <script src="<?= BASE_URL ?>/assets/js/finalizacao.js" defer></script>
 </head>
 
 <body>
@@ -51,21 +87,72 @@ if (!function_exists('imagemFinalizacao')) {
 
         <h1>Finalização</h1>
 
-        <?php if (empty($carrinho)): ?>
+        <?php if ($compraConcluida): ?>
 
             <section class="finalizacao-vazia">
+
+                <h2>Pedido realizado com sucesso!</h2>
+
+                <p>
+                    Obrigado por comprar na Elyon Perfumaria.
+                    Seu pedido foi registrado.
+                </p>
+
+                <p>
+                    Subtotal:
+                    R$ <?= number_format($totalGeral, 2, ',', '.') ?>
+                </p>
+
+                <?php if ($valorDesconto > 0): ?>
+                    <p>
+                        Desconto:
+                        - R$ <?= number_format($valorDesconto, 2, ',', '.') ?>
+                    </p>
+                <?php endif; ?>
+
+                <p>
+                    Frete:
+                    R$ <?= number_format($valorFrete, 2, ',', '.') ?>
+                </p>
+
+                <h2>
+                    Total:
+                    R$ <?= number_format($totalFinal, 2, ',', '.') ?>
+                </h2>
+
+                <a href="<?= BASE_URL ?>/" class="btn-finalizacao">
+                    Voltar para a página inicial
+                </a>
+
+            </section>
+
+        <?php elseif (empty($carrinho)): ?>
+
+            <section class="finalizacao-vazia">
+
                 <h2>Seu carrinho está vazio</h2>
 
                 <p>
                     Adicione produtos ao carrinho antes de finalizar o pedido.
                 </p>
 
-                <a href="/elyon/" class="btn-finalizacao">
+                <a href="<?= BASE_URL ?>/" class="btn-finalizacao">
                     Continuar comprando
                 </a>
+
             </section>
 
         <?php else: ?>
+
+            <?php if ($mensagemFinalizacao !== ''): ?>
+                <p class="mensagem-finalizacao">
+                    <?= htmlspecialchars(
+                        $mensagemFinalizacao,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
+                </p>
+            <?php endif; ?>
 
             <div class="tabela-finalizacao-container">
 
@@ -134,28 +221,55 @@ if (!function_exists('imagemFinalizacao')) {
 
             </div>
 
+            <section class="cupom-finalizacao">
+
+                <h2>Cupom aplicado</h2>
+
+                <?php if (!empty($cupomAplicado['Codigo'])): ?>
+
+                    <p>
+                        Código:
+                        <strong>
+                            <?= htmlspecialchars(
+                                $cupomAplicado['Codigo'],
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </strong>
+                    </p>
+
+                    <p>
+                        Desconto:
+                        <?= number_format($percentualDesconto, 2, ',', '.') ?>%
+                    </p>
+
+                <?php else: ?>
+
+                    <p>Nenhum cupom aplicado.</p>
+
+                    <a href="<?= BASE_URL ?>/carrinho">
+                        Voltar ao carrinho para aplicar um cupom.
+                    </a>
+
+                <?php endif; ?>
+
+            </section>
+
             <form
-                action="/elyon/finalizacao/confirmar"
+                action="<?= BASE_URL ?>/finalizacao/confirmar"
                 method="POST"
                 class="form-finalizacao"
             >
 
-                <section class="cupom-finalizacao">
-
-                    <h2>Cupom</h2>
-
-                    <input
-                        type="text"
-                        name="cupom"
-                        placeholder="Digite o código do cupom"
-                        maxlength="50"
-                    >
-
-                    <button type="button" class="btn-finalizacao" disabled>
-                        Aplicar cupom
-                    </button>
-
-                </section>
+                <input
+                    type="hidden"
+                    name="token_confirmacao"
+                    value="<?= htmlspecialchars(
+                        $_SESSION['token_confirmacao'] ?? '',
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>"
+                >
 
                 <section class="opcoes-finalizacao">
 
@@ -204,7 +318,7 @@ if (!function_exists('imagemFinalizacao')) {
                                 value="normal"
                                 required
                             >
-                            Entrega normal
+                            Entrega normal — R$ 10,00
                         </label>
 
                         <label>
@@ -213,7 +327,7 @@ if (!function_exists('imagemFinalizacao')) {
                                 name="frete"
                                 value="expresso"
                             >
-                            Entrega expressa
+                            Entrega expressa — R$ 20,00
                         </label>
 
                     </div>
@@ -222,28 +336,55 @@ if (!function_exists('imagemFinalizacao')) {
 
                 <section class="resumo-finalizacao">
 
+                    <h2>Resumo do pedido</h2>
+
                     <p>
-                        Confira os produtos e escolha o pagamento e o frete.
+                        <span>Subtotal:</span>
+                        <strong>
+                            R$ <?= number_format($totalGeral, 2, ',', '.') ?>
+                        </strong>
+                    </p>
+
+                    <p>
+                        <span>Desconto:</span>
+                        <strong id="valor-desconto">
+                            - R$ <?= number_format($valorDesconto, 2, ',', '.') ?>
+                        </strong>
+                    </p>
+
+                    <p>
+                        <span>Frete:</span>
+                        <strong id="valor-frete">
+                            Selecione uma entrega
+                        </strong>
                     </p>
 
                     <h2>
-                        Total dos produtos:
-                        R$ <?= number_format($totalGeral, 2, ',', '.') ?>
+                        Total:
+                        <strong
+                            id="total-final"
+                            data-subtotal="<?= number_format($totalGeral, 2, '.', '') ?>"
+                            data-desconto="<?= number_format($valorDesconto, 2, '.', '') ?>"
+                        >
+                            R$ <?= number_format($totalFinal, 2, ',', '.') ?>
+                        </strong>
                     </h2>
-
-                    <p>
-                        O valor do frete será calculado conforme a opção escolhida.
-                    </p>
 
                 </section>
 
                 <div class="botoes-finalizacao">
 
-                    <a href="/elyon/carrinho" class="btn-finalizacao">
+                    <a
+                        href="<?= BASE_URL ?>/carrinho"
+                        class="btn-finalizacao"
+                    >
                         Voltar ao carrinho
                     </a>
 
-                    <button type="submit" class="btn-finalizar-pedido">
+                    <button
+                        type="submit"
+                        class="btn-finalizar-pedido"
+                    >
                         Confirmar pedido
                     </button>
 

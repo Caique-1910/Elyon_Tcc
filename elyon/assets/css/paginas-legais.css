@@ -1,0 +1,114 @@
+
+/* PÁGINAS LEGAIS - ELYON */
+
+.pagina-legal {
+    width: 100%;
+    min-height: 100vh;
+    padding: 50px 8%;
+    background: #111;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.legal-banner {
+    text-align: center;
+    padding: 55px 20px;
+    margin-bottom: 35px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #5A2D82, #351947);
+}
+
+.legal-etiqueta {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #D3AF37;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.legal-banner h1 {
+    margin-bottom: 12px;
+    color: #fff;
+    font-size: 36px;
+}
+
+.legal-banner p {
+    color: #e5ddec;
+    font-size: 16px;
+}
+
+.legal-conteudo {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #3c2b49;
+    border-radius: 12px;
+    background: #1b1b1b;
+    line-height: 1.8;
+}
+
+.legal-atualizacao {
+    margin-bottom: 25px;
+    color: #D3AF37;
+    font-size: 13px;
+}
+
+.legal-conteudo h2 {
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: #D3AF37;
+    font-size: 21px;
+}
+
+.legal-conteudo p {
+    margin-bottom: 15px;
+    color: #ddd;
+    font-size: 15px;
+}
+
+.legal-conteudo ul {
+    margin: 10px 0 20px 25px;
+    color: #ddd;
+}
+
+.legal-conteudo li {
+    margin-bottom: 8px;
+    padding-left: 5px;
+}
+
+.legal-conteudo a {
+    color: #D3AF37;
+    text-decoration: underline;
+}
+
+.legal-conteudo a:hover {
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .pagina-legal {
+        padding: 30px 5%;
+    }
+
+    .legal-banner {
+        padding: 40px 15px;
+    }
+
+    .legal-banner h1 {
+        font-size: 28px;
+    }
+
+    .legal-conteudo {
+        padding: 25px 20px;
+    }
+
+    .legal-conteudo h2 {
+        font-size: 19px;
+    }
+
+    .legal-conteudo p,
+    .legal-conteudo li {
+        font-size: 14px;
+    }
+}

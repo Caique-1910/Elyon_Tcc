@@ -9,12 +9,14 @@
     <title>Contato - Elyon Perfumaria</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/elyon/assets/css/global.css">
-    <link rel="stylesheet" href="/elyon/assets/css/cardContato.css">
-    <link rel="stylesheet" href="/elyon/assets/css/contato.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/global.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/cardContato.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/contato.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/header.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/footer.css">
 
     <!-- JavaScript -->
-    <script src="/elyon/assets/js/contato.js" defer></script>
+    <script src="<?= BASE_URL ?>/assets/js/contato.js" defer></script>
 </head>
 
 <body>

@@ -1,4 +1,3 @@
-
 /* ========================================
    PÁGINA DO CARRINHO - ELYON
 ======================================== */
@@ -11,20 +10,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient(
-        to right,
-        #5A2D82 0%,
-        #351947 48%,
-        #080808 100%
-    );
+
+    background: linear-gradient(to right,
+            #5A2D82 0%,
+            #351947 48%,
+            #080808 100%);
 
     color: #FCF7F4;
     font-family: inherit;
 }
 
-/* Título */
+/* TÍTULO */
 
-.conteudo_carrinho > h1 {
+.conteudo_carrinho>h1 {
     margin: 0 0 28px;
     color: #D3AF37;
     font-size: 32px;
@@ -53,57 +51,62 @@
 }
 
 .tabela-carrinho th {
-    padding: 13px 12px;
+    padding: 13px 8px;
     color: #D3AF37;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     text-align: center;
 }
 
+/* LARGURA DAS CINCO COLUNAS */
+
 .tabela-carrinho th:first-child {
-    width: 40%;
+    width: 32%;
     border-radius: 9px 0 0 9px;
 }
 
 .tabela-carrinho th:nth-child(2) {
-    width: 20%;
+    width: 15%;
 }
 
 .tabela-carrinho th:nth-child(3) {
     width: 18%;
 }
 
+.tabela-carrinho th:nth-child(4) {
+    width: 17%;
+}
+
 .tabela-carrinho th:last-child {
-    width: 22%;
+    width: 18%;
     border-radius: 0 9px 9px 0;
 }
 
 .tabela-carrinho td {
-    padding: 16px 12px;
+    padding: 16px 8px;
     color: #D3AF37;
-    font-size: 15px;
+    font-size: 14px;
     text-align: center;
     vertical-align: middle;
     border-bottom: 1px solid rgba(211, 175, 55, 0.15);
 }
 
-/* Produto e imagem */
+/* PRODUTO E IMAGEM */
 
 .tabela-carrinho td.produto {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap: 16px;
+    gap: 12px;
     text-align: left;
 }
 
 .tabela-carrinho .produto img {
     display: block;
     flex-shrink: 0;
-
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
     padding: 5px;
     box-sizing: border-box;
 
@@ -117,7 +120,7 @@
     margin: 0;
     max-width: 220px;
     color: #D3AF37;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.5;
     overflow-wrap: anywhere;
 }
@@ -234,6 +237,8 @@
     font-weight: 500;
 }
 
+/* BOTÕES PRINCIPAIS */
+
 .botoes {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -276,6 +281,74 @@
 }
 
 /* ========================================
+   ATUALIZAÇÃO DE QUANTIDADE
+======================================== */
+
+.form-quantidade {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+
+.form-quantidade input {
+    width: 65px;
+    min-height: 35px;
+    padding: 5px;
+    box-sizing: border-box;
+
+    border: 1px solid #D3AF37;
+    border-radius: 7px;
+    outline: none;
+
+    background-color: #351947;
+    color: #FCF7F4;
+    text-align: center;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.form-quantidade input:focus {
+    border-color: #FFFFFF;
+}
+
+.form-quantidade button,
+.btn-remover {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 34px;
+    padding: 7px 11px;
+    box-sizing: border-box;
+
+    border: none;
+    border-radius: 7px;
+    background-color: #5A2D82;
+
+    color: #D3AF37;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+
+    transition: background-color 0.2s;
+}
+
+.form-quantidade button:hover,
+.btn-remover:hover {
+    background-color: #70409A;
+}
+
+/* MENSAGENS */
+
+.mensagem-carrinho,
+.mensagem-cupom {
+    color: #D3AF37;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+/* ========================================
    CARRINHO VAZIO
 ======================================== */
 
@@ -310,6 +383,7 @@
     color: #D3AF37;
     text-decoration: none;
     text-align: center;
+    transition: background-color 0.2s;
 }
 
 .btn-voltar:hover {
@@ -321,6 +395,7 @@
 ======================================== */
 
 @media screen and (max-width: 900px) {
+
     .conteudo_carrinho {
         padding: 30px 3% 40px;
     }
@@ -332,12 +407,12 @@
 
     .tabela-carrinho th,
     .tabela-carrinho td {
-        padding: 12px 8px;
+        padding: 12px 6px;
     }
 
     .tabela-carrinho .produto img {
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
     }
 
     .botoes {
@@ -350,11 +425,12 @@
 ======================================== */
 
 @media screen and (max-width: 600px) {
+
     .conteudo_carrinho {
         padding: 25px 12px 35px;
     }
 
-    .conteudo_carrinho > h1 {
+    .conteudo_carrinho>h1 {
         font-size: 27px;
         margin-bottom: 20px;
     }
@@ -364,7 +440,7 @@
     }
 
     .tabela-carrinho {
-        min-width: 520px;
+        min-width: 650px;
     }
 
     .tabela-carrinho th {

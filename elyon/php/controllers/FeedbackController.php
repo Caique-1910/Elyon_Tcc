@@ -1,3 +1,4 @@
+
 <?php
 
 require_once __DIR__ . '/../models/Produto.php';
@@ -5,20 +6,20 @@ require_once __DIR__ . '/../models/Feedback.php';
 
 class FeedbackController
 {
-    // Abre a página de feedback
+    // ABRE A PÁGINA DE FEEDBACK
     public function index()
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // Só permite acesso para usuários logados
+        // SÓ PERMITE ACESSO PARA USUÁRIOS LOGADOS
         if (!isset($_SESSION['usuario_id'])) {
-            header('Location: /elyon/login');
+            header('Location: ' . BASE_URL . '/login');
             exit;
         }
 
-        // Busca os produtos
+        // BUSCA OS PRODUTOS
         $model = new Produto();
 
         $produtos = $model->listar();
@@ -26,17 +27,16 @@ class FeedbackController
         require_once __DIR__ . '/../views/feedback/index.php';
     }
 
-
-    // Salva o feedback
+    // SALVA O FEEDBACK
     public function salvar()
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // Verifica se está logado
+        // VERIFICA SE ESTÁ LOGADO
         if (!isset($_SESSION['usuario_id'])) {
-            header('Location: /elyon/login');
+            header('Location: ' . BASE_URL . '/login');
             exit;
         }
 
@@ -46,8 +46,7 @@ class FeedbackController
         $estrela = $_POST['estrela'] ?? '';
         $comentario = trim($_POST['comentario'] ?? '');
 
-
-        // Verifica os campos
+        // VERIFICA OS CAMPOS
         if ($idproduto === '' || $estrela === '' || $comentario === '') {
 
             $erro = "Preencha todos os campos.";
@@ -59,13 +58,11 @@ class FeedbackController
             return;
         }
 
-
-        // Converte para número
+        // CONVERTE PARA NÚMERO
         $idproduto = (int) $idproduto;
         $estrela = (int) $estrela;
 
-
-        // Verifica estrelas
+        // VERIFICA ESTRELAS
         if ($estrela < 1 || $estrela > 5) {
 
             $erro = "A avaliação deve ser entre 1 e 5 estrelas.";
@@ -77,12 +74,10 @@ class FeedbackController
             return;
         }
 
-
-        // Cria o Model
+        // CRIA O MODEL
         $model = new Feedback();
 
-
-        // Cadastra no banco
+        // CADASTRA NO BANCO
         $resultado = $model->cadastrar(
             $idusuario,
             $idproduto,
@@ -90,12 +85,11 @@ class FeedbackController
             $estrela
         );
 
-
-        // Se cadastrou
+        // SE CADASTROU
         if ($resultado) {
 
             header(
-                'Location: /elyon/compra?id='
+                'Location: ' . BASE_URL . '/compra?id='
                 . $idproduto
                 . '&feedback=sucesso'
             );
@@ -103,8 +97,7 @@ class FeedbackController
             exit;
         }
 
-
-        // Se deu erro
+        // SE DEU ERRO
         $erro = "Erro ao cadastrar o feedback.";
 
         $modelProduto = new Produto();

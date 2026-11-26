@@ -5,21 +5,42 @@ $carrinho = $carrinho ?? [];
 
 $cupomAplicado = $cupomAplicado ?? ($_SESSION['cupom'] ?? null);
 
-$mensagemCupom = $mensagemCupom ?? '';
+$mensagemCupom = $mensagemCupom ?? ($_SESSION['mensagem_cupom'] ?? '');
+
+$mensagemCarrinho = $mensagemCarrinho ?? ($_SESSION['mensagem_carrinho'] ?? '');
+
+$tokenCsrf = $_SESSION['csrf_token'] ?? '';
+
+unset(
+    $_SESSION['mensagem_carrinho'],
+    $_SESSION['mensagem_cupom']
+);
+
+if (!is_array($carrinho)) {
+    $carrinho = [];
+}
 
 if (!is_array($cupomAplicado)) {
     $cupomAplicado = null;
 }
 
+// CALCULA O TOTAL DO CARRINHO
 $totalGeral = 0;
 
 foreach ($carrinho as $item) {
-    $preco = (float) ($item['preco'] ?? 0);
+    if (!is_array($item)) {
+        continue;
+    }
+
+    $preco = max(0, (float) ($item['preco'] ?? 0));
     $quantidade = max(1, (int) ($item['quantidade'] ?? 1));
 
     $totalGeral += $preco * $quantidade;
 }
 
+$totalGeral = round($totalGeral, 2);
+
+// CALCULA O DESCONTO
 $percentualDesconto = max(
     0,
     min(100, (float) ($cupomAplicado['Valordesconto'] ?? 0))
@@ -30,23 +51,29 @@ $valorDesconto = round(
     2
 );
 
-$totalComDesconto = max(0, $totalGeral - $valorDesconto);
+$totalComDesconto = max(
+    0,
+    round($totalGeral - $valorDesconto, 2)
+);
 
-
+// CAMINHO DAS IMAGENS
 if (!function_exists('caminhoImagemCarrinho')) {
     function caminhoImagemCarrinho($imagem)
     {
         $imagem = trim((string) $imagem);
 
         if ($imagem === '') {
-            return '/elyon/assets/imgs/logoElyon1.png';
+            return BASE_URL . '/assets/imgs/logoElyon1.png';
         }
 
-        if (preg_match('/^(https?:\/\/|\/)/i', $imagem)) {
+        if (preg_match('/^https?:\/\//i', $imagem)) {
             return $imagem;
         }
 
-        return '/elyon/' . ltrim($imagem, '/');
+        $imagem = preg_replace('/^(\.\.\/)+/', '', $imagem);
+        $imagem = ltrim($imagem, '/');
+
+        return BASE_URL . '/' . $imagem;
     }
 }
 
@@ -61,8 +88,10 @@ if (!function_exists('caminhoImagemCarrinho')) {
 
     <title>Meu Carrinho - Elyon Perfumaria</title>
 
-    <link rel="stylesheet" href="/elyon/assets/css/global.css">
-    <link rel="stylesheet" href="/elyon/assets/css/carrinho.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/global.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/carrinho.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/header.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/footer.css">
 </head>
 
 <body>
@@ -72,6 +101,14 @@ if (!function_exists('caminhoImagemCarrinho')) {
     <main class="conteudo_carrinho">
 
         <h1>Meu carrinho</h1>
+
+        <?php if ($mensagemCarrinho !== ''): ?>
+
+            <p class="mensagem-carrinho">
+                <?= htmlspecialchars($mensagemCarrinho, ENT_QUOTES, 'UTF-8') ?>
+            </p>
+
+        <?php endif; ?>
 
         <?php if (empty($carrinho)): ?>
 
@@ -84,7 +121,7 @@ if (!function_exists('caminhoImagemCarrinho')) {
                     fragrância favorita!
                 </p>
 
-                <a href="/elyon/" class="btn-voltar">
+                <a href="<?= BASE_URL ?>/" class="btn-voltar">
                     Continuar comprando
                 </a>
 
@@ -102,6 +139,7 @@ if (!function_exists('caminhoImagemCarrinho')) {
                             <th>Preço</th>
                             <th>Quantidade</th>
                             <th>Total</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
 
@@ -111,20 +149,29 @@ if (!function_exists('caminhoImagemCarrinho')) {
 
                             <?php
 
+                            if (!is_array($item)) {
+                                continue;
+                            }
+
                             $nome = (string) ($item['nome'] ?? 'Produto');
 
-                            $preco = (float) ($item['preco'] ?? 0);
+                            $preco = max(
+                                0,
+                                (float) ($item['preco'] ?? 0)
+                            );
 
                             $quantidade = max(
                                 1,
                                 (int) ($item['quantidade'] ?? 1)
                             );
 
-                            $subtotal = $preco * $quantidade;
+                            $subtotal = round($preco * $quantidade, 2);
 
                             $imagem = caminhoImagemCarrinho(
                                 $item['imagem'] ?? ''
                             );
+
+                            $idProduto = (int) $id;
 
                             ?>
 
@@ -133,49 +180,87 @@ if (!function_exists('caminhoImagemCarrinho')) {
                                 <td class="produto">
 
                                     <img
-                                        src="<?= htmlspecialchars(
-                                            $imagem,
-                                            ENT_QUOTES,
-                                            'UTF-8'
-                                        ) ?>"
-                                        alt="<?= htmlspecialchars(
-                                            $nome,
-                                            ENT_QUOTES,
-                                            'UTF-8'
-                                        ) ?>"
+                                        src="<?= htmlspecialchars($imagem, ENT_QUOTES, 'UTF-8') ?>"
+                                        alt="<?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>"
                                         loading="lazy"
                                     >
 
                                     <span>
-                                        <?= htmlspecialchars(
-                                            $nome,
-                                            ENT_QUOTES,
-                                            'UTF-8'
-                                        ) ?>
+                                        <?= htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') ?>
                                     </span>
 
                                 </td>
 
                                 <td>
-                                    R$ <?= number_format(
-                                        $preco,
-                                        2,
-                                        ',',
-                                        '.'
-                                    ) ?>
+                                    R$ <?= number_format($preco, 2, ',', '.') ?>
                                 </td>
 
                                 <td>
-                                    <?= $quantidade ?>
+
+                                    <form
+                                        action="<?= BASE_URL ?>/carrinho/atualizar"
+                                        method="POST"
+                                        class="form-quantidade"
+                                    >
+
+                                        <input
+                                            type="hidden"
+                                            name="csrf_token"
+                                            value="<?= htmlspecialchars($tokenCsrf, ENT_QUOTES, 'UTF-8') ?>"
+                                        >
+
+                                        <input
+                                            type="hidden"
+                                            name="idproduto"
+                                            value="<?= $idProduto ?>"
+                                        >
+
+                                        <input
+                                            type="number"
+                                            name="quantidade"
+                                            value="<?= $quantidade ?>"
+                                            min="1"
+                                            required
+                                        >
+
+                                        <button type="submit">
+                                            Atualizar
+                                        </button>
+
+                                    </form>
+
                                 </td>
 
                                 <td>
-                                    R$ <?= number_format(
-                                        $subtotal,
-                                        2,
-                                        ',',
-                                        '.'
-                                    ) ?>
+                                    R$ <?= number_format($subtotal, 2, ',', '.') ?>
+                                </td>
+
+                                <td>
+
+                                    <form
+                                        action="<?= BASE_URL ?>/carrinho/remover"
+                                        method="POST"
+                                        onsubmit="return confirm('Deseja remover este produto do carrinho?');"
+                                    >
+
+                                        <input
+                                            type="hidden"
+                                            name="csrf_token"
+                                            value="<?= htmlspecialchars($tokenCsrf, ENT_QUOTES, 'UTF-8') ?>"
+                                        >
+
+                                        <input
+                                            type="hidden"
+                                            name="idproduto"
+                                            value="<?= $idProduto ?>"
+                                        >
+
+                                        <button type="submit" class="btn-remover">
+                                            Remover
+                                        </button>
+
+                                    </form>
+
                                 </td>
 
                             </tr>
@@ -195,9 +280,15 @@ if (!function_exists('caminhoImagemCarrinho')) {
                     <h2>Cupom de desconto</h2>
 
                     <form
-                        action="/elyon/carrinho"
-                        method="post"
+                        action="<?= BASE_URL ?>/carrinho"
+                        method="POST"
                     >
+
+                        <input
+                            type="hidden"
+                            name="csrf_token"
+                            value="<?= htmlspecialchars($tokenCsrf, ENT_QUOTES, 'UTF-8') ?>"
+                        >
 
                         <input
                             type="text"
@@ -220,11 +311,7 @@ if (!function_exists('caminhoImagemCarrinho')) {
                     <?php if ($mensagemCupom !== ''): ?>
 
                         <p class="mensagem-cupom">
-                            <?= htmlspecialchars(
-                                $mensagemCupom,
-                                ENT_QUOTES,
-                                'UTF-8'
-                            ) ?>
+                            <?= htmlspecialchars($mensagemCupom, ENT_QUOTES, 'UTF-8') ?>
                         </p>
 
                     <?php endif; ?>
@@ -245,13 +332,7 @@ if (!function_exists('caminhoImagemCarrinho')) {
 
                         <p>
                             Desconto:
-
-                            <?= number_format(
-                                $percentualDesconto,
-                                2,
-                                ',',
-                                '.'
-                            ) ?>%
+                            <?= number_format($percentualDesconto, 2, ',', '.') ?>%
                         </p>
 
                     <?php endif; ?>
@@ -269,39 +350,21 @@ if (!function_exists('caminhoImagemCarrinho')) {
 
                         <p>
                             Subtotal:
-
-                            R$ <?= number_format(
-                                $totalGeral,
-                                2,
-                                ',',
-                                '.'
-                            ) ?>
+                            R$ <?= number_format($totalGeral, 2, ',', '.') ?>
                         </p>
 
                         <?php if ($valorDesconto > 0): ?>
 
                             <p>
                                 Desconto:
-
-                                - R$ <?= number_format(
-                                    $valorDesconto,
-                                    2,
-                                    ',',
-                                    '.'
-                                ) ?>
+                                - R$ <?= number_format($valorDesconto, 2, ',', '.') ?>
                             </p>
 
                         <?php endif; ?>
 
                         <h3>
                             Total:
-
-                            R$ <?= number_format(
-                                $totalComDesconto,
-                                2,
-                                ',',
-                                '.'
-                            ) ?>
+                            R$ <?= number_format($totalComDesconto, 2, ',', '.') ?>
                         </h3>
 
                     </div>
@@ -309,14 +372,14 @@ if (!function_exists('caminhoImagemCarrinho')) {
                     <div class="botoes">
 
                         <a
-                            href="/elyon/"
+                            href="<?= BASE_URL ?>/"
                             class="btn-voltar"
                         >
                             Continuar comprando
                         </a>
 
                         <a
-                            href="/elyon/finalizacao"
+                            href="<?= BASE_URL ?>/finalizacao"
                             class="btn-finalizar"
                         >
                             Fechar pedido

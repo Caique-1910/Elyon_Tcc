@@ -1,3 +1,4 @@
+
 <?php
 
 require_once __DIR__ . '/../config/database.php';
@@ -13,18 +14,15 @@ class FormaPagamento
         $this->conn = $database->conectar();
     }
 
-    // Listar formas de pagamento
     public function listar()
     {
         $sql = "SELECT * FROM {$this->table}";
-
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll();
     }
 
-    // Buscar forma de pagamento pelo ID
     public function buscarPorId($idfpag)
     {
         $sql = "SELECT * FROM {$this->table}
@@ -32,13 +30,11 @@ class FormaPagamento
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':idfpag', $idfpag, PDO::PARAM_INT);
-
         $stmt->execute();
 
         return $stmt->fetch();
     }
 
-    // Cadastrar forma de pagamento
     public function cadastrar($formapag, $ativo = 1, $codigonf = null)
     {
         $sql = "INSERT INTO {$this->table}
@@ -47,7 +43,6 @@ class FormaPagamento
                 (:formapag, :ativo, :codigonf)";
 
         $stmt = $this->conn->prepare($sql);
-
         $stmt->bindParam(':formapag', $formapag);
         $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
         $stmt->bindParam(':codigonf', $codigonf);
@@ -55,7 +50,6 @@ class FormaPagamento
         return $stmt->execute();
     }
 
-    // Atualizar forma de pagamento
     public function atualizar($idfpag, $formapag, $ativo, $codigonf)
     {
         $sql = "UPDATE {$this->table}
@@ -66,7 +60,6 @@ class FormaPagamento
                 WHERE Idfpag = :idfpag";
 
         $stmt = $this->conn->prepare($sql);
-
         $stmt->bindParam(':idfpag', $idfpag, PDO::PARAM_INT);
         $stmt->bindParam(':formapag', $formapag);
         $stmt->bindParam(':ativo', $ativo, PDO::PARAM_INT);
@@ -75,7 +68,6 @@ class FormaPagamento
         return $stmt->execute();
     }
 
-    // Excluir forma de pagamento
     public function excluir($idfpag)
     {
         $sql = "DELETE FROM {$this->table}
